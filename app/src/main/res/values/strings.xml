@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Desafio3</string>
+
+    <string name="login_header">Welcome to the Marvel HQ\'s</string>
+    <string name="login_btn_login">LOG IN</string>
+    <string name="login_btn_text_register">Create account</string>
+    <string name="login_chk_text">Remember</string>
+    <string name="lr_email">Email</string>
+    <string name="lr_password">Password</string>
+
+    <string name="register_name">Name</string>
+    <string name="register_title">Register</string>
+    <string name="register_btn_save">SAVE</string>
+
+</resources>

@@ -16,8 +16,6 @@ class RegisterActivity : AppCompatActivity() {
 
         btnRegister.setOnClickListener {
             finish()
-            finish()
-
         }
     }
 }

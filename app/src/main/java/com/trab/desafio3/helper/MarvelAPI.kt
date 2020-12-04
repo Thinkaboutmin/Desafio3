@@ -8,7 +8,10 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 import retrofit2.awaitResponse
 
-class MarvelAPI(val kPub: String,private val kPrivate: String, val timeStamp: String) {
+class MarvelAPI(val kPub: String, private val kPrivate: String, val timeStamp: String) {
+    var onCall = false
+    private set
+
     var hash: String? = null
     private set
 
@@ -30,7 +33,9 @@ class MarvelAPI(val kPub: String,private val kPrivate: String, val timeStamp: St
 
         fun getInstance(): MarvelAPI {
             if (obj == null) {
-                obj = MarvelAPI()
+                obj = MarvelAPI("c70e158b477c5ee33c838850e91a0be0",
+                    "d427f5a8db234bc02d1ffd9203d7fadb13254878",
+                    "1")
                 return obj!!
             }
 
@@ -39,11 +44,14 @@ class MarvelAPI(val kPub: String,private val kPrivate: String, val timeStamp: St
     }
 
     fun getComics(callback: ((response: Response<MarvelBase>) -> Unit)) {
-        if (onLastPage) {
+        if (onLastPage && onCall) {
             return
         } else if (limit == offset) {
             onLastPage = true
         }
+
+        onCall = true
+
         if (hash == null) {
             md5Digest()
         }
@@ -59,12 +67,22 @@ class MarvelAPI(val kPub: String,private val kPrivate: String, val timeStamp: St
                     limit = response.body()!!.data.total / response.body()!!.data.limit
                 }
             }
+
+            onCall = false
         }
     }
 
     fun nextPage() = ++offset
 
     fun backPage() = --offset
+
+    fun addWithImageAndDesc(comics: List<Results>) {
+        for (comic in comics) {
+            if (comic.images.isNotEmpty() && comic.description != null) {
+                this.comics.add(comic)
+            }
+        }
+    }
 
     /**
      * Na API da Marvel é necessario passar um hash md5 logo fazemos isso aqui

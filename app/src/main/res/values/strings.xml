@@ -14,4 +14,8 @@
 
     <string name="cover_title">#%1$s</string>
 
+    <string name="hq_published"><![CDATA[<b>Published</b>]]>: %1$s</string>
+    <string name="hq_price"><![CDATA[<b>Price</b>]]>: $ %1$s</string>
+    <string name="hq_pages"><![CDATA[<b>Pages</b>]]>: %1$s</string>
+
 </resources>

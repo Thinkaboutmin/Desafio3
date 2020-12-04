@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main"
+    app:startDestination="@id/HQListFragment">
+
+    <fragment
+        android:id="@+id/HQListFragment"
+        android:name="com.trab.desafio3.ui.HQListFragment"
+        android:label="HQListFragment" >
+        <action
+            android:id="@+id/action_HQListFragment_to_HQFragment"
+            app:destination="@id/HQFragment" >
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/HQFragment"
+        android:name="com.trab.desafio3.ui.HQFragment"
+        android:label="HQFragment" >
+        <argument
+            android:name="comic"
+            app:argType="com.trab.desafio3.models.Results" />
+        <action
+            android:id="@+id/action_HQFragment_to_HQCoverFullFragment"
+            app:destination="@id/HQCoverFullFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/HQCoverFullFragment"
+        android:name="com.trab.desafio3.ui.HQCoverFullFragment"
+        android:label="HQCoverFullFragment">
+        <argument
+            android:name="imagePath" />
+    </fragment>
+</navigation>

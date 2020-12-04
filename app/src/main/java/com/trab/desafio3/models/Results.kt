@@ -1,6 +1,7 @@
 package com.trab.desafio3.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.math.BigInteger
 
 /*
@@ -15,15 +16,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 
-data class Results (
+data class Results(
 	@SerializedName("title") val title : String,
 	@SerializedName("id") val id: String,
 	@SerializedName("variantDescription") val variantDescription : String,
-	@SerializedName("description") val description : String,
+	@SerializedName("description") val description : String?,
 	@SerializedName("format") val format : String,
 	@SerializedName("pageCount") val pageCount : Int,
-	@SerializedName("collections") val collections : List<String> = arrayListOf(),
 	@SerializedName("dates") val dates : List<Dates> = arrayListOf(),
 	@SerializedName("prices") val prices : List<Prices> = arrayListOf(),
 	@SerializedName("thumbnail") val thumbnail : Thumbnail,
-	@SerializedName("images") val images : List<Images> = arrayListOf())
+	@SerializedName("images") val images : List<Images> = arrayListOf()) : Serializable

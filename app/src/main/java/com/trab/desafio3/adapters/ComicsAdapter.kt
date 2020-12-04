@@ -18,7 +18,8 @@ import com.trab.desafio3.helper.MarvelAPI
 import com.trab.desafio3.models.Results
 
 
-class ComicsAdapter(val marvelApi: MarvelAPI) : RecyclerView.Adapter<ComicsAdapter.PosterViewHolder>() {
+class ComicsAdapter(val marvelApi: MarvelAPI, val hqClick: HQClick) :
+            RecyclerView.Adapter<ComicsAdapter.PosterViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.hq_poster, parent, false)
         return PosterViewHolder(view)
@@ -37,24 +38,33 @@ class ComicsAdapter(val marvelApi: MarvelAPI) : RecyclerView.Adapter<ComicsAdapt
         // Tudo no meio controla a margem
         when (position % 3) {
             0 -> {
-                params.marginEnd = 5
+                params.marginEnd = 8
             }
             1 -> {
                 title.updatePadding(left = 15)
-                params.marginEnd = 10
-                params.marginStart = 10
+                params.marginEnd = 4
+                params.marginStart = 4
             }
             2 -> {
                 title.updatePadding(left = 30)
-                params.marginStart = 5
+                params.marginStart = 8
             }
         }
     }
 
     override fun getItemCount(): Int = marvelApi.comics.size
 
-    inner class PosterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class PosterViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+        init {
+            itemView.setOnClickListener(this)
+        }
 
+        override fun onClick(p0: View?) {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                hqClick.hqClick(marvelApi.comics[position])
+            }
+        }
     }
 
 }
